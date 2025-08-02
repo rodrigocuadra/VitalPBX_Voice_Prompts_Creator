@@ -19,3 +19,6 @@ Thumbs.db
 *.log
 *.cache
 *.tmp
+
+# Git Command
+gitcommand.txt

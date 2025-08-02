@@ -238,7 +238,12 @@ $availableVoices = ['alloy','ash','ballad','coral','echo','fable','nova','onyx',
           <div id="csvPreview" class="mt-4" style="display:none;">
             <div class="mb-3">
               <button id="processAllBtn" class="btn btn-primary w-100">
-                <i class="bi bi-cloud-arrow-up"></i> Process All
+                <i class="bi bi-cloud-arrow-up"></i> Process All (Cron)
+              </button>
+            </div>
+            <div class="mb-3">
+              <button id="processRealtimeBtn" class="btn btn-warning w-100">
+                <i class="bi bi-lightning-charge"></i> Process All (Real-Time)
               </button>
             </div>
             <h5><i class="bi bi-table"></i> Preview</h5>
@@ -258,6 +263,65 @@ $availableVoices = ['alloy','ash','ballad','coral','echo','fable','nova','onyx',
       </div>
     </div>
     <?php endif; ?>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-warning">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage" class="fs-5"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="confirmCancelBtn" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="confirmOkBtn" class="btn btn-warning">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- Alert Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-info">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Information</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="alertMessage" class="fs-5"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- Real-time Progress Modal -->
+<div class="modal fade" id="realtimeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-primary">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Real-Time Processing</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="realtimeMessage">Preparing...</p>
+        <div class="progress mt-3">
+          <div id="realtimeProgress" class="progress-bar" style="width: 0%;">0%</div>
+        </div>
+        <button id="downloadZipBtn" class="btn btn-success w-100 mt-3 d-none">Download ZIP</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -542,4 +606,156 @@ if (processAllBtn) {
       .catch(err => alert('Error: ' + err.message));
   });
 }
+
+// ============================================================================
+// Helper functions for Bootstrap confirm and alert modals (Promise-based)
+// ============================================================================
+function showConfirm(message) {
+  return new Promise((resolve) => {
+    const modalEl = document.getElementById('confirmModal');
+    const modal = new bootstrap.Modal(modalEl);
+    document.getElementById('confirmMessage').innerText = message;
+
+    const okButton = document.getElementById('confirmOkBtn');
+    const cancelButton = document.getElementById('confirmCancelBtn');
+
+    const cleanUp = () => {
+      okButton.onclick = null;
+      cancelButton.onclick = null;
+    };
+
+    okButton.onclick = () => {
+      cleanUp();
+      modal.hide();
+      resolve(true);
+    };
+    cancelButton.onclick = () => {
+      cleanUp();
+      modal.hide();
+      resolve(false);
+    };
+
+    modal.show();
+  });
+}
+
+function showAlert(message) {
+  const modalEl = document.getElementById('alertModal');
+  const modal = new bootstrap.Modal(modalEl);
+  document.getElementById('alertMessage').innerText = message;
+  modal.show();
+}
+
+// ============================================================================
+// Real-Time Processing with Bootstrap modal
+// ============================================================================
+const processRealtimeBtn = document.getElementById('processRealtimeBtn');
+if (processRealtimeBtn) {
+  processRealtimeBtn.addEventListener('click', async () => {
+    const confirmed = await showConfirm("Do you want to process all rows now (real-time)?");
+    if (!confirmed) return;
+    if (!window.csvData || !window.csvData.rows) {
+      showAlert("You need to load a CSV first.");
+      return;
+    }
+
+    const modalEl = document.getElementById('realtimeModal');
+    const modal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+    const progressBar = document.getElementById('realtimeProgress');
+    const messageEl = document.getElementById('realtimeMessage');
+    const downloadBtn = document.getElementById('downloadZipBtn');
+
+    downloadBtn.classList.add('d-none');
+    progressBar.style.width = "0%";
+    progressBar.textContent = "0%";
+    messageEl.innerHTML = "Starting real-time processing...";
+    modal.show();
+
+    const profileId = window.csvData.profile;
+    const rows = window.csvData.rows;
+    const tbody = document.getElementById('csvTableBody');
+    const uploadedFiles = [];
+
+    // Clear previous state
+    [...tbody.querySelectorAll('tr')].forEach(tr => {
+      tr.style.backgroundColor = '';
+      tr.cells[2].innerHTML = '';
+    });
+
+    // Process rows sequentially
+    for (let i = 0; i < rows.length; i++) {
+      // Update progress UI before starting fetch
+      const percent = Math.round(((i) / rows.length) * 100);
+      progressBar.style.width = percent + "%";
+      progressBar.textContent = percent + "%";
+      messageEl.innerHTML = `Processing row ${i + 1} of ${rows.length}...`;
+      await new Promise(r => setTimeout(r, 100)); // short pause for UI update
+
+      const row = rows[i];
+      const tr = tbody.querySelectorAll('tr')[i];
+      try {
+        const formData = new FormData();
+        formData.append('voice_profile_id', profileId);
+        formData.append('text', row.text);
+
+        const response = await fetch('modules/stts/generate_tts.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error("Error generating audio");
+
+        const blob = await response.blob();
+        const fileExt = "mp3";
+        const fileName = row.filename;
+
+        // Upload generated audio to server
+        const uploadData = new FormData();
+        uploadData.append('filename', fileName);
+        uploadData.append('audio', new File([blob], fileName + "." + fileExt));
+
+        const uploadResp = await fetch('modules/stts/upload_audio.php', {
+          method: 'POST',
+          body: uploadData
+        });
+        const uploadResult = await uploadResp.json();
+        if (uploadResult.success) {
+          uploadedFiles.push(uploadResult.file);
+        }
+
+        tr.style.backgroundColor = '#d4edda';
+        tr.cells[2].innerHTML = '<span class="text-success fw-bold"><i class="bi bi-check-circle"></i> Done</span>';
+
+      } catch (err) {
+        tr.style.backgroundColor = '#f8d7da';
+        tr.cells[2].innerHTML = '<span class="text-danger fw-bold"><i class="bi bi-x-circle"></i> Error</span>';
+      }
+    }
+
+    // Final progress
+    progressBar.style.width = "100%";
+    progressBar.textContent = "100%";
+    messageEl.innerHTML = "Generating ZIP file...";
+
+    // Generate ZIP on server
+    try {
+      const zipResp = await fetch('modules/stts/generate_zip.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ files: uploadedFiles })
+      });
+      const zipResult = await zipResp.json();
+      if (zipResult.success) {
+        messageEl.innerHTML = "All rows processed successfully! ZIP ready.";
+        downloadBtn.classList.remove('d-none');
+        downloadBtn.onclick = () => window.open(zipResult.zip, '_blank');
+      } else {
+        messageEl.innerHTML = "Processing finished but ZIP could not be generated.";
+      }
+    } catch (zipErr) {
+      messageEl.innerHTML = "Processing finished, but ZIP generation failed.";
+    }
+  });
+}
+
 </script>
