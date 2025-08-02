@@ -1,0 +1,157 @@
+﻿activated,activated
+added,added
+agent-alreadyon,That agent is already logged on. Please enter your agent number followed by the pound key.
+agent-incorrect,Login incorrect. Please enter your agent number followed by the pound key.
+agent-loggedoff,Agent Logged off.
+agent-loginok,Agent logged in.
+agent-newlocation,"Please enter a new extension, followed by pound."
+agent-pass,Please enter your password followed by the pound key.
+agent-user,Agent login. Please enter your agent number followed by the pound key.
+all-circuits-busy-now,All circuits are busy now
+astcc-followed-by-the-pound-key,followed by pound.
+at-tone-time-exactly,"At the sound of the tone, the time will be exactly"
+auth-incorrect,Password incorrect. Please enter your password followed by the pound key.
+auth-thankyou,Thank you.
+call-forwarding,Call forwarding
+call-fwd-no-ans,Call-Forward on No Answer
+call-fwd-on-busy,Call-Forward on Busy
+call-fwd-unconditional,Call-Forward Unconditional
+call-waiting,call waiting
+calling,calling
+cancelled,Cancelled
+cannot-complete-as-dialed,Your call cannot be completed as dialed.
+check-number-dial-again,Please check the number and dial again.
+conf-adminmenu-162,"Please press 1 to mute or unmute yourself, 2 to lock or unlock the conference, 3 to eject the last user, 4 or 6 to decrease or increase the conference volume, 5 to extend the conference, 7 or 9 to decrease or increase your volume, or 8 to exit."
+conf-adminmenu-18,"Please press 1 to mute or unmute yourself, 2 to lock or unlock the conference, 3 to eject the last user, 4 or 6 to decrease or increase the conference volume, 5 to extend the conference, 7 or 9 to decrease or increase your volume, or 8 for more options."
+conf-adminmenu-menu8,"Press 1 to list users currently in the conference, 2 to kick all non-administrator users, 3 to mute or unmute all non-administrator users, 4 to record this conference, or 8 to exit this menu and return to the conference."
+conf-adminmenu,"Please press 1 to mute or unmute yourself, 2 to lock or unlock the conference, 3 to eject the last user, 4 or 6 to decrease or increase the conference volume, 7 or 9 to decrease or increase your volume, or 8 to exit."
+conf-enteringno,You are entering conference number
+conf-errormenu,Invalid Choice
+conf-extended,The conference has been extended.
+conf-full,That conference is full.
+digits/0,zero
+digits/10,ten
+digits/11,eleven
+digits/12,twelve
+digits/13,thirteen
+digits/14,fourteen
+digits/15,fifteen
+digits/16,sixteen
+digits/17,seventeen
+digits/18,eighteen
+digits/19,nineteen
+digits/1,one
+digits/20,twenty
+digits/2,two
+digits/30,thirty
+digits/3,three
+digits/40,forty
+digits/4,four
+digits/50,fifty
+digits/5,five
+digits/60,sixty
+digits/6,six
+digits/70,seventy
+digits/7,seven
+digits/80,eighty
+digits/8,eight
+digits/90,ninety
+digits/9,nine
+digits/a-m,A.M.
+digits/at,at
+digits/billion,billion
+digits/day-0,Sunday
+digits/day-1,Monday
+digits/day-2,Tuesday
+digits/day-3,Wednesday
+digits/day-4,Thursday
+digits/day-5,Friday
+digits/day-6,Saturday
+digits/dollars,dollars
+digits/euros,euros
+digits/h-10,tenth
+digits/h-11,eleventh
+digits/h-12,twelfth
+digits/h-13,thirteenth
+digits/h-14,fourteenth
+digits/h-15,fifteenth
+digits/h-16,sixteenth
+digits/h-17,seventeenth
+digits/h-18,eighteenth
+digits/h-19,nineteenth
+digits/h-1,first
+digits/h-20,twentieth
+digits/h-2,second
+digits/h-30,thirtieth
+digits/h-3,third
+digits/h-40,fourtieth
+digits/h-4,fourth
+digits/h-50,fiftieth
+digits/h-5,fifth
+digits/h-60,sixtieth
+digits/h-6,sixth
+digits/h-70,seventieth
+digits/h-7,seventh
+digits/h-80,eightieth
+digits/h-8,eighth
+digits/h-90,ninetieth
+digits/h-9,ninth
+digits/h-billion,billionth
+digits/h-hundred,hundredth
+digits/h-million,millionth
+digits/h-thousand,thousandth
+digits/hours,hours
+digits/hundred,hundred
+digits/million,million
+digits/millions,millions
+digits/minus,minus
+digits/mon-0,January
+digits/mon-10,November
+digits/mon-11,December
+digits/mon-1,February
+digits/mon-2,March
+digits/mon-3,April
+digits/mon-4,May
+digits/mon-5,June
+digits/mon-6,July
+digits/mon-7,August
+digits/mon-8,September
+digits/mon-9,October
+digits/oclock,o'clock
+digits/oh,oh
+digits/p-m,P.M.
+digits/pound,pound
+digits/star,star
+digits/thousand,thousand
+digits/today,today
+digits/tomorrow,tomorrow
+digits/yesterday,yesterday
+dir-first,letters of your party's first name.
+dir-firstlast,letters of your party's first or last name.
+dir-instr,"If this is the person you are looking for, press 1 now, otherwise please press star now."
+dir-intro-fn,Welcome to the directory. Please enter the first three letters of your party's first name using your touch tone keypad. Use the 7 key for Q and the 9 key for Z.
+dir-intro,"Welcome to the directory. Please enter the first three letters of your party's last name using your touch tone keypad. Use the 7 key for Q, and the 9 key for Z."
+dir-last,letters of your party's last name.
+dir-multi1,Press ...
+dir-multi2,for...
+dir-multi3,extension
+dir-multi9,Press 9 for more entries.
+dir-nomatch,No directory entries match your search.
+dir-nomore,There are no more compatible entries in the directory.
+dir-pls-enter,Please enter the first ...
+dir-usingkeypad,"using your touchtone keypad. Use the 7 key for Q, and the 9 key for Z."
+dir-welcome,Welcome to the directory
+disabled,disabled
+do-not-disturb,Do not disturb
+dollars,dollars
+enabled,enabled
+enter-num-blacklist,Please enter the number to be blacklisted.
+entr-num-rmv-blklist,Please enter the number to be removed from the blacklist.
+extension,extension
+feature-not-avail-line,That feature is not available on this line
+followme/call-from,incoming call from
+followme/no-recording,you have an incoming call
+followme/options,"press 1 to accept this call, or 2 to reject it"
+followme/pls-hold-while-try,please hold while I try to locate the person you are calling
+followme/sorry,"I'm sorry, but I was unable to locate the person you are calling"
+followme/status,the person you are calling is not at their desk; I will try to locate them for you

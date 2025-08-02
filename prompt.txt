@@ -1,0 +1,13 @@
+Hola, deseo crea un app para poder convertir Texto a audio usando el api de OpenAI, ya tengo la base de la interfaz web, la cual te vosy a compartir. 
+1.- config/database.php --> Donde esta las credenciales y conexion a la base de datos, 
+2.- css/bootstrap-icon.css css/bootstrap.min.css y css/fonts, 
+3.- js/bootstrap.bundle.min.js, 
+4.- helpers/session.php, 
+5.- img/, 
+6.- layouts/layout.php layouts/menu_map.php --> Menu tipo barra lateral izquierda con barra en top, se reutiliza en todos los formularios. 
+7.- logi/login.php login/logout.php --> Login y logout del sistema. 
+8.- logs/ --> donde se registran los logs del sistema, ya que se tiene acceso limitado a los log del servidor. 
+9.- models/login_model.php --> Funciones relacionadas con autenticación de usuarios y control de sesión, 
+10.- modules/users --> este es el formato de directorio para cada modulo, pro ejemplo este es el de usuarios. 
+11.- utils/helpers.php -->Contiene funciones auxiliares reutilizables en todo el sistema.
+ * Incluye verificación de permisos, detección de modo debug por usuario. Si deseas que te comparta algun archivo, con gusto.

@@ -1,0 +1,21 @@
+# Composer dependencies
+/vendor/
+
+# Logs
+/logs/
+
+# Jobs and output files
+/jobs/
+!/jobs/.gitkeep
+
+# Environment files
+.env
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.log
+*.cache
+*.tmp
