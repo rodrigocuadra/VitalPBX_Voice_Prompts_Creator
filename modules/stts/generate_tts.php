@@ -83,6 +83,31 @@ require_once __DIR__ . '/../../utils/helpers.php';
 
 global $OPENAI_API_KEY;
 
+/**
+ * Deletes files older than a specified number of hours from a directory.
+ *
+ * @param string $dir        The directory path to clean.
+ * @param int    $ttlHours   The time-to-live in hours.
+ */
+function cleanOldFiles(string $dir, int $ttlHours = 24): void {
+    if (!is_dir($dir)) return;
+
+    $ttlSeconds = $ttlHours * 3600;
+    foreach (glob($dir . '/*') as $file) {
+        if (is_file($file) && (time() - filemtime($file)) > $ttlSeconds) {
+            @unlink($file);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Optional: Clean up old files before generating new audio
+// ---------------------------------------------------------------------------
+$generatedDir = __DIR__ . '/../../jobs'; 
+if (is_dir($generatedDir)) {
+    cleanOldFiles($generatedDir, 24); 
+}
+
 // ---------------------------------------------------------------------------
 // Validate OpenAI API Key
 // ---------------------------------------------------------------------------
