@@ -55,42 +55,42 @@
 
 return [
     // Permission index 0 -> Dashboard
-    0 => [
+    1 => [
         'label' => 'Dashboard',
         'icon'  => 'bi-speedometer2', // 🏠 Dashboard icon
         'url'   => '/index.php'
     ],
 
     // Permission index 1 -> Text-to-Speech module
-    1 => [
+    2 => [
         'label' => 'Text-to-Speech',
         'icon'  => 'bi-soundwave',    // 🎙️ Soundwave icon
         'url'   => '/main.php?mod=text2speech'
     ],
 
     // Permission index 2 -> Voice Profiles module
-    2 => [
+    3 => [
         'label' => 'Voice Profiles',
         'icon'  => 'bi-robot',        // 🤖 Robot icon
         'url'   => '/main.php?mod=voiceprofiles'
     ],
 
     // Permission index 3 -> User management
-    3 => [
+    4 => [
         'label' => 'Users',
         'icon'  => 'bi-people-fill',  // 👥 Users icon
         'url'   => '/main.php?mod=users'
     ],
 
     // Permission index 4 -> Change Password
-    4 => [
+    5 => [
         'label' => 'Change Password',
         'icon'  => 'bi-key-fill',     // 🔑 Key icon
         'url'   => '/main.php?mod=changepassword'
     ],
 
     // Permission index 5 -> Email Settings module
-    5 => [
+    6 => [
         'label' => 'Email Settings',
         'icon'  => 'bi-envelope-fill', // 📧 Envelope icon
         'url'   => '/main.php?mod=email-settings'

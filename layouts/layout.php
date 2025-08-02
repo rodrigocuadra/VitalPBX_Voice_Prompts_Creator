@@ -185,17 +185,20 @@ debug_log("Rendering layout for page: $page_title", 'layout');
 
     <ul class="nav flex-column">
       <!-- Dynamic menu items based on permissions -->
-      <?php foreach ($menuItems as $index => $item): ?>
-        <?php if (($permisos[$index] ?? 'N') === 'S'): ?>
-          <li class="nav-item">
-            <a href="<?= $item['url'] ?>" class="nav-link">
-              <i class="bi bi-<?= $item['icon'] ?>"></i>
-              <?= htmlspecialchars($item['label']) ?>
-            </a>
-          </li>
-        <?php endif; ?>
+      <?php foreach ($menuItems as $permNumber => $item): ?>
+          <?php
+            // Subtract 1 to convert from permission (1-based) to string index (0-based)
+            $permIndex = $permNumber - 1;
+          ?>
+          <?php if (($permisos[$permIndex] ?? 'N') === 'S'): ?>
+            <li class="nav-item">
+              <a href="<?= $item['url'] ?>" class="nav-link">
+                <i class="bi bi-<?= $item['icon'] ?>"></i>
+                <?= htmlspecialchars($item['label']) ?>
+              </a>
+            </li>
+          <?php endif; ?>
       <?php endforeach; ?>
-
       <!-- Logout option -->
       <li class="nav-item">
         <a href="/login/logout.php" class="nav-link text-danger">

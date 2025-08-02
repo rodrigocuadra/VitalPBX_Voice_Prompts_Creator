@@ -94,7 +94,8 @@ $permissionsOptions = [
     '2'  => 'Text-to-Speech',
     '3'  => 'Voice Profiles',
     '4'  => 'Users',
-    '5'  => 'Email Settings',
+    '5'  => 'Change Password',
+    '6'  => 'Email Settings',
     '10' => 'Import CSV'
 ];
 ?>
